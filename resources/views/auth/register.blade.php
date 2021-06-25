@@ -17,7 +17,7 @@
                 <input type="text" name="password" class="form-control">
             </div> 
             <div class="form-group">
-                <button class="btn-auth"> Login </button>
+                <button class="btn-auth"> Register </button>
             </div>
         </form>
     </div>
