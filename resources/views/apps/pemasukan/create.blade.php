@@ -30,7 +30,6 @@
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="description">Harga</label>

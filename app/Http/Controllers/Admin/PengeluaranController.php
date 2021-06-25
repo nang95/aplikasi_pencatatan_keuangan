@@ -41,7 +41,7 @@ class PengeluaranController extends Controller
      */
     public function create()
     {
-        $categories = Category::get();
+        $categories = Category::where('type','Pengeluaran')->get();
 
         return view('apps.pengeluaran.create')->with('categories', $categories);
     }

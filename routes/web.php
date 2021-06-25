@@ -37,4 +37,8 @@ Route::prefix('/user')->name('user.')->namespace('Admin')->group(function(){
     Route::get('category/edit/{category}','CategoryController@edit')->name('category.edit');
     Route::put('category','CategoryController@update')->name('category.update');
     Route::delete('category','CategoryController@delete')->name('category.delete');
+
+
+    //Accounts
+    Route::get('account','AccountController@index')->name('account');
 });

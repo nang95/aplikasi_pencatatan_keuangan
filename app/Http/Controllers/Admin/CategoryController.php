@@ -29,6 +29,7 @@ class categoryController extends Controller
         // $skipped = ($category->perPage() * $category->currentPage()) - $category->perPage();
         return view('apps.category.index')->with('category', $category)
                                            ->with('tittle', $tittle);
+
     }
 
     /**
@@ -52,8 +53,8 @@ class categoryController extends Controller
     public function store(Request $request)
     {
         Category::create([
-            'name' => $request->categories
-            
+            'name' => $request->kategori,
+            'type' => $request->type,
         ]);
 
         return redirect()->route('user.category');
@@ -76,12 +77,9 @@ class categoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(category $category)
+    public function edit(Category $category)
     {
-        $categories = Category::get();
-
-        return view('apps.category.edit')->with('category', $category)
-                                          ->with('categories', $categories);
+        return view('apps.category.edit')->with('category', $category);
     }
 
     /**
@@ -95,7 +93,7 @@ class categoryController extends Controller
     {
         // ambil data pengeluaran yang id nya yg dipilih tadi
         $category = Category::findOrFail($request->id);
-
+        
         $category->update($request->all());
 
         return redirect()->route('user.category');

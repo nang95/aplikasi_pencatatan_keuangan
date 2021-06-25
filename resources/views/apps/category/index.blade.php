@@ -33,6 +33,7 @@
                             @foreach ($category as $data_category)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data_category->type}}</td>
                                 <td>{{ $data_category->name }}</td>
                                 <td>
                                     <a href="{{ route('user.category.edit', $data_category->id) }}">
