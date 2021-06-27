@@ -34,6 +34,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data_category->name }}</td>
+                                <td>{{ $data_category->type }}</td>
                                 <td>
                                     <a href="{{ route('user.category.edit', $data_category->id) }}">
                                     <button class="button button-warning">Edit</button>

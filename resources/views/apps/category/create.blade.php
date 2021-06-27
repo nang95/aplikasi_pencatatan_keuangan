@@ -15,20 +15,19 @@
                         {{ csrf_field() }} {{ method_field('POST') }}
 
                         <div class="form-group mb-3">
-                        <label for="category">Tipe</label>
-                        <select clas="custom-select tm-select-accounts" name="type" id="category">
-                        <option selected>Pilih Tipe</option>
-                        <option value="1">Pemasukan</option>
-                        <option value="2">Pengeluaran</option>
-                        </select>
+                          <label for="category">Tipe</label>
+                          <select class="custom-select tm-select-accounts" name="type" id="category">
+                              <option selected>Pilih Tipe</option>
+                              <option value="Pemasukan">Pemasukan</option>
+                              <option value="Pengeluaran">Pengeluaran</option>
+                          </select>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="description">Kategori</label>
-                            <input type="text" class="form-control validate" rows="3" name="categories" required />
+                            <label for="name">Kategori</label>
+                            <input type="text" class="form-control validate" rows="3" name="name" required />
                         </div>
                               
-                        
                         <div class="row mt-4">
                             <div class="mb-3 col-sm-6">
                                 <a href="{{ route('user.category') }}">

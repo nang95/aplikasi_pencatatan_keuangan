@@ -17,7 +17,9 @@
                     <span class="second-text"> KEUANGAN </span>
                 </div>
                 <div class="button-group">
-                    <button class="btn sign-in">Login</button>
+                    <a href="{{ route('login') }}">
+                        <button class="btn sign-in">Login</button>
+                    </a>
                 </div>
             </div>
         </div>

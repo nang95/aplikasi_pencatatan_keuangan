@@ -16,10 +16,9 @@
                             <a href="{{ route('user.pengeluaran.create') }}">
                                 <button class="button button-success">Tambah Data</button>
                             </a>
-                            <a href="{{ route('user.pengeluaran.cetak') }}">
-                                <button class="button button-success">Cetak PDF</button>
-                            </a>
-                                <a href="{{ route('user.pengeluaran.excel') }}">
+                            <button class="button button-success" data-toggle="modal" data-target="#modalCetak">Cetak PDF</button>
+
+                            <a href="{{ route('user.pengeluaran.excel') }}">
                                 <button class="button button-success">Cetak Excel</button>
                             </a>
 
@@ -84,8 +83,8 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Detail Pengeluaran</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -119,13 +118,45 @@
                 </div>
             </div>
             <div class="modal-footer">
-            <a href="{{ route('user.pengeluaran') }}">
-            <button class="button-lg button-info" type="submit">Tutup</button>
-            </a>
-            </div>
+                <button class="button-lg button-info" type="button">Tutup</button>
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalCetak" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #435c70">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle" style="color: white">Cetak</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('user.pengeluaran.cetak') }}" class="tm-edit-product-form" method="POST">
+            <div class="modal-body">
+                @csrf @method('POST')
+
+                <div class="form-group mb-3">
+                    <label for="type">Cetak Berdasarkan : </label>
+                    <select class="custom-select tm-select-accounts" name="type" id="type">
+                        <option selected>- Silahkan Pilih -</option>
+                        <option value="per_hari">Hari ini</option>
+                        <option value="per_minggu">Minggu Ini</option>
+                        <option value="per_bulan">Bulan Ini</option>
+                        <option value="semua">Semua</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="button-lg button-info" type="submit">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('footer_script')

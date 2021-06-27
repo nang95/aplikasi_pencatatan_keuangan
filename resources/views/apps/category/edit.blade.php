@@ -11,19 +11,23 @@
             </div>
             <div class="row tm-edit-product-row">
                 <div class="col-xl-12 col-lg-12 col-md-12">
-                <form action="{{ route('user.category.store') }}" class="tm-edit-product-form" method="POST">
-                        {{ csrf_field() }} {{ method_field('POST') }}
-                        
+                <form action="{{ route('user.category.update') }}" class="tm-edit-product-form" method="POST">
+                        {{ csrf_field() }} {{ method_field('PUT') }}
+
+                        <input type="hidden" name="id" value="{{ $category->id }}">
+
                         <div class="form-group mb-3">
-                        <label for="categories">Tipe</label>
-                        <select clas="custom-select tm-select-accounts" name="type" id="category">
-                        <option selected>Pilih Tipe</option>
-                        <option value="1">Pemasukan</option>
-                        <option value="2">Pengeluaran</option>
+                          <label for="categories">Tipe</label>
+                          <select class="custom-select tm-select-accounts" name="type" id="category">
+                            <option selected>Pilih Tipe</option>
+                            <option value="Pemasukan" {{ $category->type == "Pemasukan" ? 'selected' : '' }}>Pemasukan</option>
+                            <option value="Pengeluaran" {{ $category->type == "Pengeluaran" ? 'selected' : '' }}>Pengeluaran</option>
+                          </select>
+                        </div>
 
                         <div class="form-group mb-3">
                             <label for="description">Kategori</label>
-                            <input type="text" class="form-control validate" rows="3" name="categories" required />
+                            <input type="text" class="form-control validate" rows="3" value="{{ $category->name }}" name="name" required />
                         </div>
                                 
                         <div class="row mt-4">
@@ -37,6 +41,7 @@
                             </div>
                         </div>
                     </form>
+                    
                 </div>
             </div>
           </div>

@@ -17,8 +17,8 @@ Route::prefix('/user')->name('user.')->namespace('Admin')->group(function(){
     Route::get('pemasukan/edit/{pemasukan}','PemasukanController@edit')->name('pemasukan.edit');
     Route::put('pemasukan','PemasukanController@update')->name('pemasukan.update');
     Route::delete('pemasukan','PemasukanController@delete')->name('pemasukan.delete');
-    Route::get('pemasukan/cetak','PemasukanController@cetak')->name('pemasukan.cetak');
-    Route::get('/pemasukan/export_excel', 'PemasukanController@export_excel')->name('pemasukan.excel');
+    Route::post('pemasukan/cetak','PemasukanController@cetak')->name('pemasukan.cetak');
+    Route::get('pemasukan/export_excel', 'PemasukanController@export_excel')->name('pemasukan.excel');
 
     //pengeluaran
     Route::get('pengeluaran','PengeluaranController@index')->name('pengeluaran');
@@ -28,7 +28,7 @@ Route::prefix('/user')->name('user.')->namespace('Admin')->group(function(){
     Route::put('pengeluaran','PengeluaranController@update')->name('pengeluaran.update');
     Route::delete('pengeluaran','PengeluaranController@delete')->name('pengeluaran.delete');
     Route::get('pengeluaran/cetak','PengeluaranController@cetak')->name('pengeluaran.cetak');
-    Route::get('/pengeluaran/export_excel', 'PengeluaranController@export_excel')->name('pengeluaran.excel');
+    Route::get('pengeluaran/export_excel', 'PengeluaranController@export_excel')->name('pengeluaran.excel');
 
     //Kategori
     Route::get('category','CategoryController@index')->name('category');
