@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{Pemasukan, Category};
 use PDF;
+use Carbon\Carbon;
 
 class PemasukanController extends Controller
 {
@@ -128,9 +129,35 @@ class PemasukanController extends Controller
         return redirect()->back();
     }
 
-    public function cetak(){
-        $pemasukan = Pemasukan::all();
-        $pemasukan_total = Pemasukan::sum('price');
+    public function cetak(Request $request){
+        $carbon = new Carbon(now());
+        $startOfMonth = $carbon->startOfMonth()->toDateString();
+        $endOfMonth = $carbon->endOfMonth()->toDateString();
+        $next_sunday = date('Y-m-d',strtotime('next sunday'));
+        $previous_sunday = date('Y-m-d',strtotime('previous sunday'));
+
+        $pemasukan = new Pemasukan;
+
+        switch ($request->type) {
+            case 'per_hari':
+                $pemasukan->where('date', date('Y-m-d'));
+                $pemasukan = $pemasukan->get();
+                break;
+            case 'per_minggu':
+                $pemasukan->where('date', '<=', $next_sunday);
+                $pemasukan = $pemasukan->get();
+                break;
+            case 'per_bulan':
+                $pemasukan->where('date', '>=', $startOfMonth)
+                          ->where('date', '<=', $endOfMonth);
+                $pemasukan = $pemasukan->get();
+                break;
+            case 'semua':
+                $pemasukan = $pemasukan->get();
+                break;
+        }
+    
+        $pemasukan_total = $pemasukan->sum('price');
 
         $pdf = PDF::loadview('apps.pemasukan.cetak',[
                                                      'pemasukan'=>$pemasukan, 

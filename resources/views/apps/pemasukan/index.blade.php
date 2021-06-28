@@ -16,9 +16,7 @@
                             <a href="{{ route('user.pemasukan.create') }}">
                                 <button class="button button-success">Tambah Data</button>
                             </a>
-                            <a href="{{ route('user.pemasukan.cetak') }}">
-                                <button class="button button-success">Cetak PDF</button>
-                            </a>
+                            <button class="button button-success" data-toggle="modal" data-target="#modalCetak">Cetak PDF</button>
                             <a href="{{ route('user.pemasukan.excel') }}">
                                 <button class="button button-success">Cetak Excel</button>
                             </a>
@@ -82,50 +80,38 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+<!-- Modal -->
+<div class="modal fade" id="modalCetak" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #435c70">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Detail Pemasukan</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle" style="color: white">Cetak</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <form action="{{ route('user.pemasukan.cetak') }}" class="tm-edit-product-form" method="POST">
             <div class="modal-body">
-                <div style="margin-bottom:10px">
-                    <div>Judul</div>
-                    <div id="item-tittle">Nama Pengeluaran</div>
-                </div>
+                @csrf @method('POST')
 
-                <div style="margin-bottom:10px">
-                    <div>Kategori</div>
-                    <div id="item-category">Nama Pengeluaran</div>
+                <div class="form-group mb-3">
+                    <label for="type">Cetak Berdasarkan : </label>
+                    <select class="custom-select tm-select-accounts" name="type" id="type">
+                        <option selected>- Silahkan Pilih -</option>
+                        <option value="per_hari">Hari ini</option>
+                        <option value="per_minggu">Minggu Ini</option>
+                        <option value="per_bulan">Bulan Ini</option>
+                        <option value="semua">Semua</option>
+                    </select>
+                    </div>
                 </div>
-
-                <div style="margin-bottom:10px">
-                    <div>Jumlah</div>
-                    <div id="item-price">Nama Pengeluaran</div>
+                <div class="modal-footer">
+                    <button class="button-lg button-info" type="submit">Simpan</button>
                 </div>
-
-                <div style="margin-bottom:10px">
-                    <div>Tanggal</div>
-                    <div id="item-date">Nama Pengeluaran</div>
-                </div>
-
-                <div style="margin-bottom:10px">
-                    <div>Keterangan</div>
-                    <div id="item-description">Nama Pengeluaran</div>
-                </div>
-            </div>
-            <div class="modal-footer">
-            <a href="{{ route('user.pemasukan') }}">
-            <button class="button-lg button-info" type="submit">Tutup</button>
-            </a>
-            </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 @endsection
 
 @section('footer_script')

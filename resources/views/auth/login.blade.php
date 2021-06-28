@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="tittle">Login</div>
+    <div class="tittle">Masuk</div>
     <div class="auth-form">
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -14,8 +14,10 @@
                 <input type="password" name="password" class="form-control">
             </div> 
             <div class="form-group">
-                <button class="btn-auth" type="submit"> Login </button>
+                <button class="btn-auth"> Masuk </button>
             </div>
+
+            <div> Belum punya akun? <a href="{{ route('register') }}">Daftar</a> </div>
         </form>
     </div>
 @endsection

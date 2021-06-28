@@ -22,7 +22,7 @@ class categoryController extends Controller
 
         // jika pencarian tittle tidak sama dengan kosong/empty
         if(!empty($tittle)){
-            $category->where('tittle', $tittle);
+            $category->where('name', $tittle);
         }
 
         $category = $category->paginate(10);
@@ -53,7 +53,7 @@ class categoryController extends Controller
     public function store(Request $request)
     {
         Category::create([
-            'name' => $request->kategori,
+            'name' => $request->name,
             'type' => $request->type,
         ]);
 

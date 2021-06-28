@@ -13,14 +13,10 @@ class CreateCategorysTable extends Migration
      */
     public function up()
     {
-        Schema::create('categorys', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('tittle');
-            $table->float('price');
-            $table->date('date');
-            $table->text('description');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->on('categories')->references('id')->onDelete('cascade');
+            $table->string('name');
+            $table->string('type');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateCategorysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categorys');
+        Schema::dropIfExists('categories');
     }
 }
