@@ -81,6 +81,49 @@
     </div>
 
 <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Detail Pemasukan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom:10px">
+                    <div>Judul</div>
+                    <div id="item-tittle">Nama Pemasukan</div>
+                </div>
+
+                <div style="margin-bottom:10px">
+                    <div>Kategori</div>
+                    <div id="item-category">Nama Pemasukan</div>
+                </div>
+
+                <div style="margin-bottom:10px">
+                    <div>Jumlah</div>
+                    <div id="item-price">Nama Pemasukan</div>
+                </div>
+
+                <div style="margin-bottom:10px">
+                    <div>Tanggal</div>
+                    <div id="item-date">Nama Pemasukan</div>
+                </div>
+
+                <div style="margin-bottom:10px">
+                    <div>Keterangan</div>
+                    <div id="item-description">Nama Pemasukan</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="button-lg button-info" type="button">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
 <div class="modal fade" id="modalCetak" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="background-color: #435c70">

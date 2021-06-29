@@ -12,13 +12,13 @@
         <div class="cover"> 
             <div class="text-group">
                 <div class="tittle">
-                <div class="first-text">WELCOME TO!</div> 
+                <div class="first-text">SELAMAT DATANG DI</div> 
                 <span class="first-text">APLIKASI PENCATATAN</span> 
                     <span class="second-text"> KEUANGAN </span>
                 </div>
                 <div class="button-group">
                     <a href="{{ route('login') }}">
-                        <button class="btn sign-in">Login</button>
+                        <button class="btn sign-in">Masuk</button>
                     </a>
                 </div>
             </div>

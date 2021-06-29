@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{Pengeluaran, Category};
 use PDF;
+use Carbon\Carbon;
 
 class PengeluaranController extends Controller
 {
@@ -67,7 +68,6 @@ class PengeluaranController extends Controller
         Session::flash('flash_message','Data Berhasil Disimpan');
         return redirect()->route('user.pengeluaran');
     }
-
 
     /**
      * Display the specified resource.
@@ -129,18 +129,70 @@ class PengeluaranController extends Controller
         return redirect()->back();
     }
 
-    public function cetak(){
-        $pengeluaran = Pengeluaran::all();
-        $pengeluaran_total = Pengeluaran::sum('price');
+    public function cetak(Request $request){
+        $carbon = new Carbon(now());
+        $startOfMonth = $carbon->startOfMonth()->toDateString();
+        $endOfMonth = $carbon->endOfMonth()->toDateString();
+        $next_sunday = date('Y-m-d',strtotime('next sunday'));
+        $previous_sunday = date('Y-m-d',strtotime('previous sunday'));
+
+        $pengeluaran = new Pengeluaran;
+
+      switch ($request->type) {
+            case 'per_hari':
+                $pengeluaran = $pengeluaran->where('date', date('Y-m-d'))->get();
+                break;
+            case 'per_minggu':
+                $pengeluaran = $pengeluaran->where('date', '<=', $next_sunday)->get();
+                break;
+            case 'per_bulan':
+                $pengeluaran = $pengeluaran->where('date', '>=', $startOfMonth)
+                          ->where('date', '<=', $endOfMonth)->get();
+                break;
+            case 'semua':
+                $pengeluaran = $pengeluaran->get();
+                break;
+        }
+    
+        $pengeluaran_total = $pengeluaran->sum('price');
 
         $pdf = PDF::loadview('apps.pengeluaran.cetak',[
                                                      'pengeluaran'=>$pengeluaran, 
                                                      'pengeluaran_total' => $pengeluaran_total
                                                     ]);
         return $pdf->download('laporan-pengeluaran-pdf.pdf');
-}
-public function export_excel()
-{
-    return Excel::download(new PengeluaranExport, 'Pengeluaran.xlsx');
-}
-}
+    }
+
+    public function excel(Request $request){
+        $carbon = new Carbon(now());
+        $startOfMonth = $carbon->startOfMonth()->toDateString();
+        $endOfMonth = $carbon->endOfMonth()->toDateString();
+        $next_sunday = date('Y-m-d',strtotime('next sunday'));
+        $previous_sunday = date('Y-m-d',strtotime('previous sunday'));
+
+        $pengeluaran = new Pengeluaran;
+
+      switch ($request->type) {
+            case 'per_hari':
+                $pengeluaran = $pengeluaran->where('date', date('Y-m-d'))->get();
+                break;
+            case 'per_minggu':
+                $pengeluaran = $pengeluaran->where('date', '<=', $next_sunday)->get();
+                break;
+            case 'per_bulan':
+                $pengeluaran = $pengeluaran->where('date', '>=', $startOfMonth)
+                          ->where('date', '<=', $endOfMonth)->get();
+                break;
+            case 'semua':
+                $pengeluaran = $pengeluaran->get();
+                break;
+        }
+    
+        $pengeluaran_total = $pengeluaran->sum('price');
+
+        $excel = Excel::loadview('apps.pengeluaran.excel',[
+                                                     'pengeluaran'=>$pengeluaran, 
+                                                     'pengeluaran_total' => $pengeluaran_total
+                                                    ]);
+        return $excel->download('laporan-pengeluaran-excel.xlsx');
+    }}

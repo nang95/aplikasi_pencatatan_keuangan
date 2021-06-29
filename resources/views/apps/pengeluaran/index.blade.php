@@ -17,10 +17,8 @@
                                 <button class="button button-success">Tambah Data</button>
                             </a>
                             <button class="button button-success" data-toggle="modal" data-target="#modalCetak">Cetak PDF</button>
+                            <button class="button button-success" data-toggle="modal" data-target="#modalexcel">Cetak Excel</button>
 
-                            <a href="{{ route('user.pengeluaran.excel') }}">
-                                <button class="button button-success">Cetak Excel</button>
-                            </a>
 
                         </div>
                         <div class="col-6" style="text-align: right">
@@ -179,4 +177,38 @@
         });
 
     </script>
+@endsection
+
+<!-- Modal -->
+<div class="modal fade" id="modalexcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: #435c70">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle" style="color: white">Cetak</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('user.pemasukan.excel') }}" class="tm-edit-product-form" method="POST">
+            <div class="modal-body">
+                @csrf @method('POST')
+
+                <div class="form-group mb-3">
+                    <label for="type">Cetak Berdasarkan : </label>
+                    <select class="custom-select tm-select-accounts" name="type" id="type">
+                        <option selected>- Silahkan Pilih -</option>
+                        <option value="per_hari">Hari ini</option>
+                        <option value="per_minggu">Minggu Ini</option>
+                        <option value="per_bulan">Bulan Ini</option>
+                        <option value="semua">Semua</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="button-lg button-info" type="submit">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection

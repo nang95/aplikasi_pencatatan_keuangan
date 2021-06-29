@@ -140,17 +140,14 @@ class PemasukanController extends Controller
 
         switch ($request->type) {
             case 'per_hari':
-                $pemasukan->where('date', date('Y-m-d'));
-                $pemasukan = $pemasukan->get();
+                $pemasukan = $pemasukan->where('date', date('Y-m-d'))->get();
                 break;
             case 'per_minggu':
-                $pemasukan->where('date', '<=', $next_sunday);
-                $pemasukan = $pemasukan->get();
+                $pemasukan = $pemasukan->where('date', '<=', $next_sunday)->get();
                 break;
             case 'per_bulan':
-                $pemasukan->where('date', '>=', $startOfMonth)
-                          ->where('date', '<=', $endOfMonth);
-                $pemasukan = $pemasukan->get();
+                $pemasukan = $pemasukan->where('date', '>=', $startOfMonth)
+                          ->where('date', '<=', $endOfMonth)->get();
                 break;
             case 'semua':
                 $pemasukan = $pemasukan->get();
