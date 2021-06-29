@@ -163,9 +163,8 @@ class PemasukanController extends Controller
         return $pdf->download('laporan-pemasukan-pdf.pdf');
     }
 
-public function export_excel()
-{
-    return Excel::download(new PemasukanExport, 'Pemasukan.xlsx');
-}
+    public function export_excel(Request $request){
+        return Excel::download(new PemasukanExport($request->type), 'Pemasukan.xlsx');
+    }
 
 }

@@ -163,36 +163,7 @@ class PengeluaranController extends Controller
         return $pdf->download('laporan-pengeluaran-pdf.pdf');
     }
 
-    public function excel(Request $request){
-        $carbon = new Carbon(now());
-        $startOfMonth = $carbon->startOfMonth()->toDateString();
-        $endOfMonth = $carbon->endOfMonth()->toDateString();
-        $next_sunday = date('Y-m-d',strtotime('next sunday'));
-        $previous_sunday = date('Y-m-d',strtotime('previous sunday'));
-
-        $pengeluaran = new Pengeluaran;
-
-      switch ($request->type) {
-            case 'per_hari':
-                $pengeluaran = $pengeluaran->where('date', date('Y-m-d'))->get();
-                break;
-            case 'per_minggu':
-                $pengeluaran = $pengeluaran->where('date', '<=', $next_sunday)->get();
-                break;
-            case 'per_bulan':
-                $pengeluaran = $pengeluaran->where('date', '>=', $startOfMonth)
-                          ->where('date', '<=', $endOfMonth)->get();
-                break;
-            case 'semua':
-                $pengeluaran = $pengeluaran->get();
-                break;
-        }
-    
-        $pengeluaran_total = $pengeluaran->sum('price');
-
-        $excel = Excel::loadview('apps.pengeluaran.excel',[
-                                                     'pengeluaran'=>$pengeluaran, 
-                                                     'pengeluaran_total' => $pengeluaran_total
-                                                    ]);
-        return $excel->download('laporan-pengeluaran-excel.xlsx');
-    }}
+    public function export_excel(Request $request){
+        return Excel::download(new PengeluaranExport($request->type), 'Pemasukan.xlsx');
+    }
+}

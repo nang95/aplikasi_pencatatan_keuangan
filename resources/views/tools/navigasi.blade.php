@@ -11,33 +11,33 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto h-100">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('user.dashboard') }}">
+                    <a class="nav-link @if (request()->is('user/dashboard')) active @endif" href="{{ route('user.dashboard') }}">
                     <i class="fas fa-home"></i>
                         Dashboard
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('user.category')}}">
+                    <a class="nav-link @if (request()->is('user/category')) active @endif" href="{{route('user.category')}}">
                     <i class="fas fa-tags"></i>
                         Kategori
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.pemasukan') }}">
+                    <a class="nav-link @if (request()->is('user/pemasukan')) active @endif" href="{{ route('user.pemasukan') }}">
                     <i class="fas fa-wallet"></i>
                         Pemasukan
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.pengeluaran') }}">
+                    <a class="nav-link @if (request()->is('user/pengeluaran')) active @endif" href="{{ route('user.pengeluaran') }}">
                     <i class="fas fa-shopping-cart"></i>
                         Pengeluaran
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.account') }}">
+                    <a class="nav-link @if (request()->is('user/account')) active @endif" href="{{ route('user.account') }}">
                     <i class="fas fa-user-cog"></i>
                         Account
                     </a>

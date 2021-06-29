@@ -18,7 +18,7 @@ Route::prefix('/user')->name('user.')->namespace('Admin')->group(function(){
     Route::put('pemasukan','PemasukanController@update')->name('pemasukan.update');
     Route::delete('pemasukan','PemasukanController@delete')->name('pemasukan.delete');
     Route::post('pemasukan/cetak','PemasukanController@cetak')->name('pemasukan.cetak');
-    Route::get('pemasukan/export_excel', 'PemasukanController@export_excel')->name('pemasukan.excel');
+    Route::post('pemasukan/export_excel', 'PemasukanController@export_excel')->name('pemasukan.excel');
 
     //pengeluaran
     Route::get('pengeluaran','PengeluaranController@index')->name('pengeluaran');
