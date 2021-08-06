@@ -6,6 +6,7 @@ use App\Models\Pengeluaran;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Carbon\Carbon;
 
 class PengeluaranExport implements FromCollection, WithHeadings
 {
@@ -21,7 +22,11 @@ class PengeluaranExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        
+        $carbon = new Carbon(now());
+        $startOfMonth = $carbon->startOfMonth()->toDateString();
+        $endOfMonth = $carbon->endOfMonth()->toDateString();
+        $next_sunday = date('Y-m-d',strtotime('next sunday'));
+        $previous_sunday = date('Y-m-d',strtotime('previous sunday'));
         $pengeluaran = new Pengeluaran;
 
         switch ($this->type) {

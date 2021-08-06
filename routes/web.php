@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::prefix('/user')->name('user.')->namespace('Admin')->group(function(){
-    Route::get('/', 'DashboardController@index')->name('/');
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::prefix('/user')->name('user.')->namespace('Admin')->group(function(){
+    Route::get('/', 'DashboardController@index')->name('/');  
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
     //pemasukan
@@ -41,4 +41,5 @@ Route::prefix('/user')->name('user.')->namespace('Admin')->group(function(){
 
     //Accounts
     Route::get('account','AccountController@index')->name('account');
+    Route::post('account', 'AccountController@update')->name('account.update');
 });

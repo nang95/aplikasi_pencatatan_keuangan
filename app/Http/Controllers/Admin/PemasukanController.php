@@ -77,7 +77,7 @@ class PemasukanController extends Controller
      */
     public function show($id)
     {
-        //
+      //
     }
 
     /**

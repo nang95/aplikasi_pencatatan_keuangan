@@ -13,7 +13,7 @@
                 <li class="nav-item">
                     <a class="nav-link @if (request()->is('user/dashboard')) active @endif" href="{{ route('user.dashboard') }}">
                     <i class="fas fa-home"></i>
-                        Dashboard
+                        Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>

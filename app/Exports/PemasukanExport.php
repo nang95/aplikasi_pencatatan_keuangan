@@ -6,6 +6,7 @@ use App\Models\Pemasukan;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Carbon\Carbon;
 
 
 class PemasukanExport implements FromCollection, WithHeadings
@@ -22,9 +23,15 @@ class PemasukanExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
+        $carbon = new Carbon(now());
+        $startOfMonth = $carbon->startOfMonth()->toDateString();
+        $endOfMonth = $carbon->endOfMonth()->toDateString();
+        $next_sunday = date('Y-m-d',strtotime('next sunday'));
+        $previous_sunday = date('Y-m-d',strtotime('previous sunday'));
         
         $pemasukan = new Pemasukan;
 
+        
         switch ($this->type) {
             case 'per_hari':
                 $pemasukan = $pemasukan->where('date', date('Y-m-d'))->get();
